@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Simple Game</title>
+    <style>
+        #hero {
+            position: absolute;
+            width: 50px;
+            height: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div id="hero"></div>
+    
+    <script>
+        const hero = document.getElementById("hero");
+        const speed = 5; // Thay đổi tốc độ tại đây
+
+        let heroX = 0;
+        let heroY = 0;
+
+        // Thiết lập ảnh nhân vật
+        hero.style.backgroundImage = "url('path_to_your_image.jpg')";
+        hero.style.backgroundSize = "cover";
+
+        function moveHero(e) {
+            switch(e.key) {
+                case "ArrowUp":
+                    heroY -= speed;
+                    break;
+                case "ArrowDown":
+                    heroY += speed;
+                    break;
+                case "ArrowLeft":
+                    heroX -= speed;
+                    break;
+                case "ArrowRight":
+                    heroX += speed;
+                    break;
+            }
+            hero.style.left = heroX + "px";
+            hero.style.top = heroY + "px";
+        }
+
+        // Bắt sự kiện phím
+        window.addEventListener("keydown", moveHero);
+    </script>
+</body>
+</html>
