@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Temperature Converter</title>
+</head>
+<body>
+  <h1>Temperature Converter</h1>
+  <label for="celsiusInput">Enter Temperature in Celsius: </label>
+  <input type="text" id="celsiusInput">
+  <button onclick="convertTemperature()">Convert</button>
+  <p id="result"></p>
+
+  <script>
+    class Temperature {
+      constructor(celsius) {
+        if (celsius < -273) {
+          throw new Error("Nhiệt độ không thể thấp hơn -273 độ C.");
+        }
+        this.celsius = celsius;
+      }
+
+      // Chuyển đổi từ độ C sang độ F
+      toFahrenheit() {
+        return (this.celsius * 9/5) + 32;
+      }
+
+      // Chuyển đổi từ độ C sang độ Kenvin
+      toKelvin() {
+        return this.celsius + 273.15;
+      }
+    }
+
+    function convertTemperature() {
+      const celsiusInput = document.getElementById("celsiusInput").value;
+      const celsius = parseFloat(celsiusInput);
+
+      if (isNaN(celsius)) {
+        document.getElementById("result").innerHTML = "Please enter a valid temperature in Celsius.";
+        return;
+      }
+
+      const temperature = new Temperature(celsius);
+      const fahrenheit = temperature.toFahrenheit();
+      const kelvin = temperature.toKelvin();
+
+      document.getElementById("result").innerHTML = `Nhiệt độ ${celsius} độ C tương đương với ${fahrenheit} độ F và ${kelvin} Kenvin.`;
+    }
+  </script>
+</body>
+</html>
