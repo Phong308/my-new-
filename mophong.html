@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Flashlight App</title>
+</head>
+<body>
+    <h1>Flashlight App</h1>
+    <button id="turnOnButton">Turn On</button>
+    <button id="turnOffButton">Turn Off</button>
+    <p id="status">Status: </p>
+
+    <script>
+        class Battery {
+            constructor() {
+                this.energy = 0;
+            }
+
+            setEnergy(energy) {
+                this.energy = energy;
+            }
+
+            getEnergy() {
+                return this.energy;
+            }
+
+            decreaseEnergy() {
+                if (this.energy > 0) {
+                    this.energy--;
+                }
+            }
+        }
+
+        class FlashLamp {
+            constructor() {
+                this.status = false;
+                this.battery = new Battery();
+                this.battery.setEnergy(10);
+            }
+
+            getBatteryInfo() {
+                return this.battery.getEnergy();
+            }
+
+            light() {
+                if (this.status && this.battery.getEnergy() > 0) {
+                    return "Lighting";
+                } else {
+                    return "Not lighting";
+                }
+            }
+
+            turnOn() {
+                this.status = true;
+            }
+
+            turnOff() {
+                this.status = false;
+            }
+        }
+
+        const flashLamp = new FlashLamp();
+
+        document.getElementById('turnOnButton').addEventListener('click', () => {
+            flashLamp.turnOn();
+            document.getElementById('status').innerText = "Status: " + flashLamp.light();
+        });
+
+        document.getElementById('turnOffButton').addEventListener('click', () => {
+            flashLamp.turnOff();
+            document.getElementById('status').innerText = "Status: " + flashLamp.light();
+        });
+    </script>
+</body>
+</html>
