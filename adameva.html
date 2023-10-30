@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Adam and Eva Story</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 60%;
+            margin: auto;
+        }
+
+        th, td {
+            border: 1px solid black;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .center-text {
+            display: flex;
+            justify-content: center;
+            align-items: left;
+            height: 100%;
+            width: 150px;
+        }
+        .center-textt {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100%;
+            width: 200px;
+        }
+        .connect-arrow {
+            position: relative;
+            width: 200px;
+            height: 50px;
+            margin: 0 auto;
+        }
+
+        .arrow-line {
+            position: absolute;
+            top: 50%;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background-color: black;
+            transform: translateY(-50%);
+        }
+
+        .arrow-head {
+            position: absolute;
+            top: 50%;
+            right: -10px;
+            width: 0;
+            height: 0;
+            border-style: solid;
+            border-width: 10px 10px 10px 0;
+            border-color: transparent black transparent transparent;
+            transform: translateY(-50%);
+        }
+    </style>
+</head>
+<body>
+    <h1>Adam and Eva Story</h1>
+
+    
+    <table>
+        <tr>
+            <th  style="background-color: burlywood;" class="center-textt">Human</th>
+        </tr>
+        
+        <tr>
+            <td style="background-color: burlywood;" class="center-textt">
+                - name: String<br>
+                - gender: boolean<br>
+                - weight: int<br>
+                
+            </td>
+        </tr>
+        <br>
+        <tr>
+            <td style="background-color: burlywood;" class="center-textt">
+                + Human()<br>
+                + isMale(): boolean<br>
+                + setGender(boolean): void<br>
+                + checkApple(Apple): boolean<br>
+                + eat(Apple) : void<br>
+                + say(String): void<br>
+                + getName(): String<br>
+                + setName(String): void<br>
+                + getWeight(): int<br>
+                + setWeight(int): void<br>
+
+            </td>
+        </tr>
+    </table>
+    <br>
+    <br>
+    <table>
+        <tr>
+            <th style="background-color: burlywood;" class="center-text">Apple</th>
+        </tr>
+        <tr>
+            <td style="background-color: burlywood;" class="center-text">- weight: int</td>
+        </tr>
+        <tr>
+            <td style="background-color: burlywood;" class="center-text">
+                + Apple(): void<br>
+                + decrease(): void<br>
+                + isEmpty(): boolean<br>
+                + getWeight(): int
+            </td>
+        </tr>
+    </table>
+</body>
+</html>
