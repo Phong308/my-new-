@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Rectangle Example</title>
+</head>
+<body>
+    <canvas id="myCanvas" width="400" height="200"></canvas>
+    <p>Diện tích: <span id="area"></span></p>
+    <p>Chu vi: <span id="perimeter"></span></p>
+    <button onclick="changeRectangleSize()">Thay đổi kích thước</button>
+
+    <script>
+        class Rectangle {
+            constructor(length, width) {
+                this.length = length;
+                this.width = width;
+            }
+
+            getArea() {
+                return this.length * this.width;
+            }
+
+            getPerimeter() {
+                return 2 * (this.length + this.width);
+            }
+
+            drawRectangleOnCanvas(canvasId) {
+                const canvas = document.getElementById(canvasId);
+                if (canvas.getContext) {
+                    const ctx = canvas.getContext('2d');
+                    ctx.fillStyle = 'blue'; // Màu sắc của hình chữ nhật
+                    ctx.fillRect(10, 10, this.length, this.width); // Vẽ hình chữ nhật tại vị trí (10, 10)
+                }
+            }
+        }
+
+        const myRectangle = new Rectangle(100, 50);
+        myRectangle.drawRectangleOnCanvas('myCanvas');
+
+        function updateAreaAndPerimeter() {
+            const areaElement = document.getElementById('area');
+            const perimeterElement = document.getElementById('perimeter');
+
+            areaElement.textContent = myRectangle.getArea();
+            perimeterElement.textContent = myRectangle.getPerimeter();
+        }
+
+        function changeRectangleSize() {
+            myRectangle.length = parseInt(prompt("Nhập chiều dài mới:"));
+            myRectangle.width = parseInt(prompt("Nhập chiều rộng mới:"));
+            myRectangle.drawRectangleOnCanvas('myCanvas');
+            updateAreaAndPerimeter();
+        }
+
+        updateAreaAndPerimeter();
+    </script>
+</body>
+</html>
