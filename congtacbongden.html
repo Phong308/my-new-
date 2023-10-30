@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Light Bulb App</title>
+</head>
+<body>
+    <h1>Light Bulb</h1>
+    <div>
+        <button id="toggleButton">Toggle</button>
+        <p id="status">Bóng đèn đang tắt</p>
+    </div>
+
+    <script>
+        // Định nghĩa đối tượng Bóng đèn
+        var bulb = {
+            isOn: false,
+            turnOn: function () {
+                this.isOn = true;
+            },
+            turnOff: function () {
+                this.isOn = false;
+            }
+        };
+
+        // Định nghĩa đối tượng Công tắc
+        var switchButton = {
+            toggle: function () {
+                if (bulb.isOn) {
+                    bulb.turnOff();
+                } else {
+                    bulb.turnOn();
+                }
+            }
+        };
+
+        // Xử lý sự kiện khi nút "Toggle" được nhấn
+        var toggleButton = document.getElementById("toggleButton");
+        var status = document.getElementById("status");
+
+        toggleButton.addEventListener("click", function () {
+            switchButton.toggle();
+            if (bulb.isOn) {
+                status.textContent = "Bóng đèn đang bật";
+            } else {
+                status.textContent = "Bóng đèn đang tắt";
+            }
+        });
+    </script>
+</body>
+</html>
