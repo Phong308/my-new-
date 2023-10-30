@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Remote Control</title>
+    <style>
+        #tv {
+            width: 300px;
+            margin: 0 auto;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>Remote Control for TiVi</h1>
+
+    <div id="tv">
+        <h2>TiVi</h2>
+        <p>Kênh: <span id="channel">1</span></p>
+        <p>Âm lượng: <span id="volume">10</span></p>
+        <p>Trạng thái: <span id="status">Tắt</span></p>
+    </div>
+
+    <div>
+        <h2>Remote</h2>
+        <button onclick="turnOnOff()">Bật / Tắt</button>
+        <button onclick="changeChannel(7)">Kênh 7</button>
+        <button onclick="changeChannel(3)">Kênh 3</button>
+        <button onclick="adjustVolume(2)">Tăng Âm lượng</button>
+        <button onclick="adjustVolume(-2)">Giảm Âm lượng</button>
+    </div>
+
+    <script>
+        var channel = 1;
+        var volume = 10;
+        var isOn = false;
+
+        function updateTV() {
+            document.getElementById("channel").textContent = channel;
+            document.getElementById("volume").textContent = volume;
+            document.getElementById("status").textContent = isOn ? "Bật" : "Tắt";
+        }
+
+        function turnOnOff() {
+            isOn = !isOn;
+            updateTV();
+        }
+
+        function changeChannel(newChannel) {
+            if (isOn) {
+                channel = newChannel;
+                updateTV();
+            }
+        }
+
+        function adjustVolume(delta) {
+            if (isOn) {
+                volume += delta;
+                if (volume < 0) {
+                    volume = 0;
+                }
+                updateTV();
+            }
+        }
+    </script>
+</body>
+</html>
