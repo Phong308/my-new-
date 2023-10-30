@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Cat and Rat Simulation</title>
+</head>
+<body>
+    <h1>Cat and Rat Simulation</h1>
+
+    <button onclick="simulateCatAndRat()">Start Simulation</button>
+    
+    <p id="output"></p>
+
+    <script>
+        function simulateCatAndRat() {
+            let outputElement = document.getElementById("output");
+            outputElement.innerHTML = "";
+
+            // Define the Rat class
+            class Rat {
+                constructor(name, weight, speed) {
+                    this.name = name;
+                    this.weight = weight;
+                    this.speed = speed;
+                    this.isAlive = true;
+                }
+
+                makeSound() {
+                    return "Chít, chít";
+                }
+
+                die() {
+                    this.isAlive = false;
+                }
+
+                getWeight() {
+                    return this.weight;
+                }
+            }
+
+            // Define the Cat class
+            class Cat {
+                constructor(name, weight, maxSpeed) {
+                    this.name = name;
+                    this.weight = weight;
+                    this.maxSpeed = maxSpeed;
+                }
+
+                makeSound() {
+                    return "Meo meo";
+                }
+
+                catchRat(rat) {
+                    if (this.maxSpeed > rat.speed) {
+                        outputElement.innerHTML += this.name + " caught " + rat.name + "<br>";
+                        rat.die();
+                    } else {
+                        outputElement.innerHTML += this.name + " couldn't catch " + rat.name + "<br>";
+                    }
+                }
+
+                eatRat(rat) {
+                    if (rat.isAlive) {
+                        outputElement.innerHTML += this.name + " can't eat a live rat.<br>";
+                    } else {
+                        this.weight += rat.getWeight();
+                        outputElement.innerHTML += this.name + " ate " + rat.name + "<br>";
+                    }
+                }
+
+                getWeight() {
+                    return this.weight;
+                }
+            }
+
+            const rat1 = new Rat("Jerry", 0.2, 5.0);
+            const cat1 = new Cat("Tom", 5.0, 10.0);
+
+            outputElement.innerHTML += rat1.makeSound() + "<br>";
+            outputElement.innerHTML += cat1.makeSound() + "<br>";
+
+            cat1.catchRat(rat1);
+            cat1.eatRat(rat1);
+
+            outputElement.innerHTML += "Weight of " + cat1.name + ": " + cat1.getWeight() + "<br>";
+        }
+    </script>
+</body>
+</html>
