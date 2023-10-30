@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Caro Game</title>
+    <style>
+        #board {
+            position: relative;
+            width: 400px;
+            height: 400px;
+            display: grid;
+            grid-template-columns: repeat(20, 20px);
+            grid-template-rows: repeat(20, 20px);
+        }
+
+        .cell {
+            width: 20px;
+            height: 20px;
+            border: 1px solid #000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+
+        .cell:hover {
+            background: lightgray;
+        }
+
+        #winner {
+            font-size: 24px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Caro Game</h1>
+    <div id="board"></div>
+    <p id="winner"></p>
+    
+    <script>
+        const board = document.getElementById("board");
+        const winnerText = document.getElementById("winner");
+        const gridSize = 20;
+        const boardArray = Array.from({ length: gridSize }, () => Array(gridSize).fill(null));
+        let currentPlayer = "X";
+        let gameOver = false;
+
+        function createCell(row, col) {
+            const cell = document.createElement("div");
+            cell.className = "cell";
+            cell.dataset.row = row;
+            cell.dataset.col = col;
+            cell.addEventListener("click", cellClick);
+            board.appendChild(cell);
+        }
+
+        function cellClick() {
+            if (!gameOver && !boardArray[this.dataset.row][this.dataset.col]) {
+                boardArray[this.dataset.row][this.dataset.col] = currentPlayer;
+                this.textContent = currentPlayer;
+
+                if (checkWin(this.dataset.row, this.dataset.col)) {
+                    winnerText.textContent = `Player ${currentPlayer} wins!`;
+                    gameOver = true;
+                } else {
+                    currentPlayer = currentPlayer === "X" ? "O" : "X";
+                }
+            }
+        }
+
+        function checkWin(row, col) {
+            return (
+                checkDirection(row, col, 1, 0) ||
+                checkDirection(row, col, 0, 1) ||
+                checkDirection(row, col, 1, 1) ||
+                checkDirection(row, col, 1, -1)
+            );
+        }
+
+        function checkDirection(row, col, rowIncrement, colIncrement) {
+            let count = 1;
+            let player = boardArray[row][col];
+
+            for (let i = 1; i < 5; i++) {
+                const newRow = parseInt(row) + i * rowIncrement;
+                const newCol = parseInt(col) + i * colIncrement;
+
+                if (newRow >= 0 && newRow < gridSize && newCol >= 0 && newCol < gridSize) {
+                    if (boardArray[newRow][newCol] === player) {
+                        count++;
+                    } else {
+                        break;
+                    }
+                } else {
+                    break;
+                }
+            }
+
+            for (let i = 1; i < 5; i++) {
+                const newRow = parseInt(row) - i * rowIncrement;
+                const newCol = parseInt(col) - i * colIncrement;
+
+                if (newRow >= 0 && newRow < gridSize && newCol >= 0 && newCol < gridSize) {
+                    if (boardArray[newRow][newCol] === player) {
+                        count++;
+                    } else {
+                        break;
+                    }
+                } else {
+                    break;
+                }
+            }
+
+            return count >= 5;
+        }
+
+        for (let row = 0; row < gridSize; row++) {
+            for (let col = 0; col < gridSize; col++) {
+                createCell(row, col);
+            }
+        }
+    </script>
+</body>
+</html>
